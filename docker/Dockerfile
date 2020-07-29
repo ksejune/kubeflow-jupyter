@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.0.0-py3
+FROM python:3.6
 
 WORKDIR /home/jovyan
 
@@ -35,15 +35,11 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key
 RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 RUN apt-get update
 RUN apt-get install -y kubectl
-RUN pip install kubeflow-fairing==0.7.2
-RUN pip install kfp==0.5 
-RUN pip install kfserving==0.2.2
-RUN pip install kubeflow-kale
-RUN pip install dill
-
 
 RUN pip install jupyterlab && \
     jupyter serverextension enable --py jupyterlab --sys-prefix
+
+RUN pip install kubernetes kubeflow kfp redis
 
 ARG NB_USER=jovyan
 
