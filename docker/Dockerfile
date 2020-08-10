@@ -39,6 +39,8 @@ RUN apt-get install -y kubectl
 RUN pip install jupyterlab && \
     jupyter serverextension enable --py jupyterlab --sys-prefix
 
+RUN pip install -U setuptools
+RUN pip install azure==4.0.0
 RUN pip install kubernetes kubeflow kfp redis
 
 ARG NB_USER=jovyan
